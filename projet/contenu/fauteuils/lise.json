@@ -1,0 +1,18 @@
+{
+  "nom": "Lise",
+  "en_ligne": true,
+  "a_la_une": true,
+  "ordre": 2,
+  "disponibilite": "Disponible",
+  "photo": "/images/fauteuils/lise.svg",
+  "description_photo": "Fauteuil Lise, chauffeuse à dossier haut sans accoudoirs",
+  "photos": [],
+  "style": "[STYLE]",
+  "epoque": "[ÉPOQUE]",
+  "description": "[Quelques lignes sur l'histoire du fauteuil et le relooking réalisé : ce qui a été gardé d'origine, ce qui a été refait, le choix du tissu.]",
+  "dimensions": "[L × P × H cm]",
+  "hauteur_assise": "[H cm]",
+  "structure": "[Essence de bois, finition]",
+  "tissu": "[Matière, coloris]",
+  "travaux": "[Garnissage, ressorts, vernis…]"
+}

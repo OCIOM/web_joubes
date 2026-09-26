@@ -1,0 +1,122 @@
+SITE JOUBES — GUIDE DE MISE EN LIGNE ET D'ADMINISTRATION
+========================================================
+
+EN RÉSUMÉ
+---------
+Une fois installé (étapes 1 à 6, à faire une seule fois), vous gérez vos fauteuils ainsi :
+  1. Allez sur https://joubes.fr/admin
+  2. Cliquez sur « Fauteuils », puis sur « Nouveau » (ou sur un fauteuil existant pour le modifier).
+  3. Remplissez le formulaire, ajoutez vos photos, enregistrez.
+  4. Le site se met à jour tout seul en une à deux minutes.
+
+Coût total : le nom de domaine seulement (environ 5 à 10 € par an). GitHub (stockage du site), Cloudflare Pages (hébergement), Web3Forms (formulaire) et l'administration sont gratuits.
+
+
+CE QUE CONTIENT CE DOSSIER
+--------------------------
+projet/ : le site complet. C'est ce dossier qu'on envoie sur GitHub.
+  - contenu/fauteuils/ : une fiche par fauteuil (modifiées par l'administration, inutile d'y toucher).
+  - contenu/reglages.json : téléphone, e-mail, clé du formulaire (modifiables dans l'administration).
+  - modeles/ : les textes des pages Atelier, Mentions légales, Merci et Page introuvable.
+  - static/ : styles, polices, images, et la page d'administration (static/admin/).
+  - build.js : le petit programme qui fabrique le site à partir de tout cela. Cloudflare le lance automatiquement.
+
+
+ÉTAPE 1 — CRÉER UN COMPTE GITHUB ET Y DÉPOSER LE SITE
+-----------------------------------------------------
+GitHub sert de coffre-fort pour votre site : l'administration y enregistre vos modifications.
+1. Créez un compte gratuit sur https://github.com/signup
+2. En haut à droite, cliquez sur « + » puis « New repository ».
+3. Nom : joubes. Choisissez « Private » (privé). Cochez « Add a README file ». Cliquez sur « Create repository ».
+4. Dans le dépôt, cliquez sur « Add file » puis « Upload files ».
+5. Ouvrez le dossier projet/ sur votre ordinateur, sélectionnez TOUT son contenu (les dossiers contenu, modeles, static et le fichier build.js) et glissez-le dans la page. Cliquez sur « Commit changes ».
+   Important : déposez le contenu du dossier projet/, pas le dossier lui-même.
+
+
+ÉTAPE 2 — INDIQUER VOTRE COMPTE DANS L'ADMINISTRATION
+-----------------------------------------------------
+1. Sur GitHub, ouvrez static/admin/config.yml puis cliquez sur l'icône crayon (Edit).
+2. Ligne « repo: VOTRE-COMPTE-GITHUB/joubes » : remplacez VOTRE-COMPTE-GITHUB par votre nom d'utilisateur GitHub.
+3. Si votre adresse n'est pas https://joubes.fr, corrigez aussi la ligne « site_url ».
+4. Cliquez sur « Commit changes ».
+
+
+ÉTAPE 3 — METTRE EN LIGNE SUR CLOUDFLARE PAGES (gratuit)
+--------------------------------------------------------
+1. Créez un compte gratuit sur https://dash.cloudflare.com/sign-up
+2. Ouvrez « Workers & Pages », puis « Créer » (Create), puis l'onglet « Pages ».
+3. Choisissez « Se connecter à Git » (Connect to Git), puis GitHub. Autorisez Cloudflare à accéder au dépôt joubes.
+4. Réglages de construction :
+     - Préréglage de framework (Framework preset) : Aucun (None)
+     - Commande de construction (Build command) : node build.js
+     - Répertoire de sortie (Build output directory) : public
+5. Cliquez sur « Enregistrer et déployer ». Votre site est en ligne à une adresse du type https://joubes.pages.dev
+Les intitulés de Cloudflare peuvent légèrement changer, mais le principe reste le même.
+À partir de maintenant, chaque modification enregistrée (depuis l'administration ou GitHub) remet le site à jour automatiquement.
+
+
+ÉTAPE 4 — BRANCHER VOTRE NOM DE DOMAINE
+---------------------------------------
+1. Achetez joubes.fr chez un registraire (OVHcloud, Infomaniak, Gandi…) ou directement chez Cloudflare.
+2. Dans votre projet Cloudflare Pages, ouvrez « Domaines personnalisés » (Custom domains), ajoutez joubes.fr puis www.joubes.fr.
+3. Suivez les instructions affichées pour les réglages DNS. Le cadenas HTTPS est automatique et gratuit. Comptez de quelques minutes à 24 h.
+
+
+ÉTAPE 5 — CRÉER VOTRE CLÉ D'ACCÈS À L'ADMINISTRATION (une seule fois)
+---------------------------------------------------------------------
+C'est votre « mot de passe » pour l'administration. Gardez-le pour vous.
+1. Sur GitHub, cliquez sur votre photo (en haut à droite) puis « Settings ».
+2. Tout en bas du menu de gauche : « Developer settings », puis « Personal access tokens », puis « Fine-grained tokens ».
+3. Cliquez sur « Generate new token ».
+     - Token name : Administration Joubes
+     - Expiration : la durée la plus longue proposée (notez la date : il faudra en recréer une à l'expiration)
+     - Repository access : « Only select repositories », puis choisissez joubes
+     - Permissions, Repository permissions : « Contents » sur « Read and write »
+4. Cliquez sur « Generate token » et copiez la clé affichée (elle commence par github_pat_). Elle ne sera plus affichée ensuite.
+5. Allez sur https://joubes.fr/admin (ou https://joubes.pages.dev/admin), choisissez la connexion par jeton d'accès (access token) et collez la clé. Votre navigateur s'en souviendra.
+
+
+ÉTAPE 6 — COMPLÉTER VOS INFORMATIONS
+------------------------------------
+Dans l'administration :
+  - « Réglages du site » : votre téléphone, votre e-mail, votre adresse de site.
+  - Clé Web3Forms (pour recevoir les messages du formulaire) : allez sur https://web3forms.com, saisissez votre adresse e-mail, copiez la clé reçue et collez-la dans « Réglages du site ». Pensez à vérifier vos courriers indésirables la première fois.
+  - « Fauteuils » : remplacez les 4 fauteuils d'exemple par les vôtres (ou supprimez-les).
+
+Sur GitHub (crayon « Edit », puis « Commit changes ») :
+  - modeles/mentions-legales.html : nom ou société, forme juridique, adresse, SIRET, directeur de la publication, médiateur de la consommation, date. Faites relire ce texte par un professionnel (votre CCI peut vous aider).
+  - modeles/atelier.html : l'histoire de Joubes, le nom associé à la citation. Photos de l'atelier : remplacez les fichiers atelier*.svg dans static/images/.
+  - build.js, section « L'atelier » de l'accueil : les trois lignes entre crochets (structure, garnissage, tissus).
+Astuce : cherchez « [ » pour trouver tout ce qui reste à compléter.
+
+
+UTILISER L'ADMINISTRATION AU QUOTIDIEN
+--------------------------------------
+Ajouter un fauteuil : Fauteuils, puis Nouveau. Remplissez le nom, la photo principale et sa description, puis les informations. Enregistrez.
+Modifier un fauteuil : cliquez dessus, changez ce que vous voulez, enregistrez.
+Un fauteuil est réservé ou vendu : changez « Disponibilité ». Une petite étiquette « Réservé » ou « Vendu » s'affiche sur le site.
+Retirer un fauteuil sans le perdre : décochez « Afficher sur le site ».
+Supprimer définitivement : ouvrez le fauteuil, puis Supprimer.
+Page d'accueil : cochez « Afficher sur la page d'accueil » sur 4 fauteuils. Le premier (selon l'ordre d'affichage) devient la grande image.
+Ordre : le champ « Ordre d'affichage » range les fauteuils (1 = en premier).
+
+Les photos sont automatiquement allégées (format WebP) à l'envoi. Des photos carrées et bien éclairées donnent le meilleur rendu. Le champ « Description de la photo » est important : il est lu aux personnes malvoyantes et aide Google Images.
+
+Ne changez pas le nom d'un fauteuil déjà en ligne : l'adresse de sa page en dépend. Pour un autre nom, créez plutôt un nouveau fauteuil.
+
+
+ÉTAPE FINALE — ÊTRE BIEN TROUVÉ SUR GOOGLE
+------------------------------------------
+1. Allez sur https://search.google.com/search-console et ajoutez votre domaine.
+2. Dans « Sitemaps », envoyez : sitemap.xml (il se met à jour tout seul à chaque ajout de fauteuil).
+3. Créez une fiche Google Business Profile (gratuite).
+4. Ajoutez régulièrement des fauteuils : un site qui vit est mieux référencé.
+
+
+BON À SAVOIR
+------------
+- La page /admin n'est pas indexée par Google, et sans votre clé personne ne peut rien y modifier.
+- Si la clé expire, recréez-en une (étape 5) et reconnectez-vous.
+- Historique : chaque modification est conservée dans GitHub. En cas d'erreur, on peut toujours revenir en arrière.
+- Les polices sont hébergées sur le site (aucun appel à Google Fonts) et le site ne dépose aucun cookie : pas besoin de bandeau cookies. Si vous ajoutez un outil de statistiques, pensez au consentement et aux mentions légales. Cloudflare Web Analytics est gratuit et sans cookie.
+- Test de qualité avant livraison (Google Lighthouse) : 100/100 en performance, accessibilité, bonnes pratiques et référencement.
