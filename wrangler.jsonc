@@ -1,7 +1,9 @@
 {
-  name web-joubes,
-  compatibility_date 2026-09-26,
-  assets {
-    directory .public
+  "name": "web-joubes",
+  "compatibility_date": "2026-09-26",
+  "assets": {
+    "directory": "./projet/public",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
   }
 }

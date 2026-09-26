@@ -11,7 +11,7 @@ logo:
 site_url: https://joubes.fr
 
 # Les photos envoyées sont rangées ici, puis automatiquement converties en WebP et redimensionnées.
-media_folder: static/images/fauteuils
+media_folder: projet/static/images/fauteuils
 public_folder: /images/fauteuils
 media_libraries:
   default:
@@ -33,7 +33,7 @@ collections:
     label: Fauteuils
     label_singular: Fauteuil
     description: "Ajoutez, modifiez ou retirez les fauteuils de la collection. Chaque enregistrement met le site à jour en une à deux minutes."
-    folder: contenu/fauteuils
+    folder: projet/contenu/fauteuils
     format: json
     extension: json
     create: true
@@ -72,7 +72,7 @@ collections:
     files:
       - name: coordonnees
         label: Coordonnées et réglages
-        file: contenu/reglages.json
+        file: projet/contenu/reglages.json
         format: json
         fields:
           - { label: "Téléphone (affiché)", name: telephone, widget: string, hint: "Ex. : 06 12 34 56 78" }
