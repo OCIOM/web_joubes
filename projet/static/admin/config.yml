@@ -2,7 +2,7 @@
 # À MODIFIER une seule fois : remplacez VOTRE-COMPTE-GITHUB par votre nom d'utilisateur GitHub.
 backend:
   name: github
-  repo: VOTRE-COMPTE-GITHUB/joubes
+  repo: OCIOM/web_joubes
   branch: main
 
 app_title: Joubes — administration
