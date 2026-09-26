@@ -45,8 +45,7 @@ collections:
     fields:
       - { label: "Nom du fauteuil", name: nom, widget: string, hint: "Ex. : Aube. Le nom sert aussi à l'adresse de la page (ne le changez plus une fois en ligne)." }
       - { label: "Afficher sur le site", name: en_ligne, widget: boolean, default: true, hint: "Décochez pour masquer le fauteuil sans le supprimer." }
-      - { label: "Afficher sur la page d'accueil", name: a_la_une, widget: boolean, default: false, hint: "Les 4 premiers fauteuils cochés apparaissent sur l'accueil. Le premier est la grande image." }
-      - { label: "Ordre d'affichage", name: ordre, widget: number, value_type: int, default: 10, min: 1, hint: "1 = en premier." }
+      - { label: "Ordre d'affichage", name: ordre, widget: number, value_type: int, default: 10, min: 1, hint: "1 = en premier. Les 4 premiers fauteuils de la collection apparaissent aussi sur l'accueil, le premier en grande image." }
       - { label: "Disponibilité", name: disponibilite, widget: select, options: ["Disponible", "Réservé", "Vendu"], default: "Disponible" }
       - { label: "Photo principale", name: photo, widget: image, hint: "Photo carrée de préférence, bien éclairée." }
       - { label: "Description de la photo", name: description_photo, widget: string, hint: "Décrivez ce qu'on voit, ex. : Fauteuil Aube en velours vert, vue de face. Utile aux malvoyants et à Google." }

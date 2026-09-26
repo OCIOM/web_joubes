@@ -41,7 +41,8 @@ const fauteuils = fs.readdirSync(dossierF).filter((f) => f.endsWith('.json')).ma
 }).filter((f) => f.en_ligne !== false && !vide(f.nom))
   .sort((a, b) => (Number(a.ordre) || 999) - (Number(b.ordre) || 999) || a.nom.localeCompare(b.nom, 'fr'));
 
-const alaUne = (() => { const u = fauteuils.filter((f) => f.a_la_une); return (u.length ? u : fauteuils).slice(0, 4); })();
+// L'accueil reprend exactement la collection (même ordre) : les 4 premiers fauteuils.
+const alaUne = fauteuils.slice(0, 4);
 const altDe = (f) => esc(vide(f.description_photo) ? `Fauteuil ${f.nom}` : f.description_photo);
 const photoDe = (f) => esc(vide(f.photo) ? '/images/logo.svg' : f.photo);
 const statut = (f) => (f.disponibilite && f.disponibilite !== 'Disponible') ? `<p class="statut">${esc(f.disponibilite)}</p>` : '';
