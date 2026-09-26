@@ -1,6 +1,9 @@
 {
   "name": "web-joubes",
   "compatibility_date": "2026-09-26",
+  "build": {
+    "command": "node projet/build.js"
+  },
   "assets": {
     "directory": "./projet/public",
     "not_found_handling": "404-page",
